@@ -3,15 +3,14 @@
 
 #define PAGE_BUDDY_MAPCOUNT_VALUE (-128)
 
-void *mem_map_base;
-
 struct list_head {
   struct list_head *next, *prev;
 };
 
+// 40 bytes
 struct page {
   struct list_head lru;
-  unsigned long flag;
+  /* unsigned long flag; */
   unsigned long _private;
   int _mapcount;
 };
@@ -21,5 +20,6 @@ struct free_area {
   unsigned long nr_free;
 };
 
+struct page *mem_map_base;
 
 #endif

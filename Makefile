@@ -1,3 +1,3 @@
 all:
-	g++ main --std=c++11 *.cpp *.h
+	g++ --std=c++11 -o main *.cpp *.h
 

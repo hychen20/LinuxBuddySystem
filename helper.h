@@ -2,6 +2,7 @@
 #define _HELPER_H
 
 #include "types.h"
+#include "list.h"
 
 #define page_to_pfn(page) ((unsigned long)((page) - mem_map_base))
 
@@ -84,8 +85,8 @@ static inline int page_order(struct page *page)
 /*
  * This function checks whether a page is free && is the buddy
  * we can do coalesce a page and its buddy if
- * (a) the buddy is not in a hole &&
- * (b) the buddy is in the buddy system &&
+ * (a) the buddy is not in a hole && (deleted)
+ * (b) the buddy is in the buddy system && (deleted)
  * (c) a page and its buddy have the same order &&
  * (d) a page and its buddy are in the same zone.
  *
@@ -96,10 +97,10 @@ static inline int page_order(struct page *page)
  *
  * For recording page's order, we use page_private(page).
  */
-static inline int page_is_buddy(struct page *page, struct page *buddy,
+static inline int page_is_buddy(struct page *buddy,
 							unsigned int order)
 {
-	if (PageBuddy(buddy) && page_order(buddy) == order) {
+	if (PageBuddy(buddy) && page_order(buddy) == (int)order) {
 		return 1;
 	}
 	return 0;
