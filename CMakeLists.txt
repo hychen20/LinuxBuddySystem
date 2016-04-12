@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 2.8)
+project(LinuxBuddy)
+find_package(Boost 1.60.0)
+if(Boost_FOUND)
+  include_directories(${Boost_INCLUDE_DIRS})
+  aux_source_directory(./linux_helper HELPER_SRCS)
+  add_executable(main main.cc)
+endif()
